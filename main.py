@@ -1,10 +1,9 @@
-from srs.masks import get_mask_account, get_mask_card_number
+from srs.widget import get_date, mask_account_card
 
 # Запрашиваем у пользователя номер карты и номер счета
-card_number = input("Введите номер карты: ")
-account_number = input("Введите номер счёта: ")
+account_number = input("Введите номер карты или счета: ")
+user_data = input("Введите дату: ")
 
 # Вызываем функцию, которая маскирует номер карты
-print(get_mask_card_number(card_number))
-# Вызываем функцию, которая маскирует номер счёта
-print(get_mask_account(account_number))
+print(mask_account_card(account_number))
+print(get_date(user_data))

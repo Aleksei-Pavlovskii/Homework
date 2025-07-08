@@ -1,13 +1,18 @@
-def mask_account_card(numbers_card_or_check: str) -> str:
+from srs.masks import get_mask_account
+
+
+def mask_account_card(account_number: str) -> str:
     """Функция, которая маскирует номер карты или счета"""
 
     card_name = []
-    card_namber_split = numbers_card_or_check.split(" ")
+    card_namber_split = account_number.split(" ")
     join_card_number = "".join(card_namber_split[-1])
     for i in card_namber_split:
         if i == "Счет":
             card_name.append(i)
-            return f"{" ".join(card_name)} **{join_card_number[-4:]}"
+            return f"{" ".join(card_name)} {get_mask_account(account_number)}"
+        else:
+            pass
         for i in card_namber_split:
             if i.isalpha():
                 card_name.append(i)
