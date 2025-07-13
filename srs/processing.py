@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any, Dict, List
 
 
@@ -11,3 +12,9 @@ def filter_by_state(list_dic: List[Dict[str, Any]], state: str = "EXECUTED") -> 
             filter_state.append(dic)
     return filter_state
 
+
+def sort_by_date(list_dic: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[str, Any]]:
+    """ Функция, которая сортирует список по дате в порядке убывания """
+
+    sorted_date = sorted(list_dic, key=lambda k: datetime.fromisoformat(k["date"]), reverse=reverse)
+    return sorted_date
