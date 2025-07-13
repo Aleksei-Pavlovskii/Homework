@@ -10,3 +10,4 @@ def filter_by_state(list_dic: List[Dict[str, Any]], state: str = "EXECUTED") -> 
         if dic.get("state") == state:
             filter_state.append(dic)
     return filter_state
+
