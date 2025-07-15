@@ -1,4 +1,4 @@
-from srs.widget import mask_account_card, get_date
+from srs.widget import get_date, mask_account_card
 
 
 def test_mask_account_card():
