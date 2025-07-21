@@ -21,7 +21,10 @@ line_length = 119
 [tool.mypy]
 disallow_untyped_defs=true
 warn_return_any=true
-exclude = ".git"
+exclude = [
+    "^tests/",
+    ".git",
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -33,3 +36,7 @@ mypy = "^1.16.1"
 black = "^25.1.0"
 isort = "^6.0.1"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
