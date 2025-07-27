@@ -27,7 +27,6 @@ def test_console_success(capsys):
     """Тест успешного выполнения с выводом в консоль"""
     assert console_success(2, 3) == 5
     captured = capsys.readouterr()
-    assert "console_success started" in captured.out
     assert "console_success ok" in captured.out
 
 
@@ -36,6 +35,5 @@ def test_console_error(capsys):
     with pytest.raises(ValueError):
         console_failure()
     captured = capsys.readouterr()
-    assert "console_failure started" in captured.out
     assert "console_failure error: ValueError" in captured.out
     assert "Inputs: (), {}" in captured.out

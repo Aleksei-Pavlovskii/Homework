@@ -2,8 +2,13 @@ import datetime
 
 
 def log(filename=None):
+    """Декоратор для логирования выполнения функций"""
+
     def decorator(func):
+        """Внутренний декоратор, применяемый к функции"""
+
         def wrapper(*args, **kwargs):
+            """Обертка, выполняющая логирование"""
             # Формируем строку с информацией о вызове
             func_name = func.__name__
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
