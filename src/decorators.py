@@ -1,13 +1,24 @@
 import datetime
+from functools import wraps
+from typing import Any, Callable
 
 
-def log(filename=None):
+def write_log(filename: str | None, log_message: str) -> None:
+    if filename:
+        with open(filename, "a") as f:
+            f.write(log_message)
+    else:
+        print(log_message.strip())
+
+
+def log(filename: str | None = None) -> Callable:
     """Декоратор для логирования выполнения функций"""
 
-    def decorator(func):
+    def decorator(func: Callable) -> Any:
         """Внутренний декоратор, применяемый к функции"""
 
-        def wrapper(*args, **kwargs):
+        @wraps(func)
+        def wrapper(*args: tuple, **kwargs: dict) -> Any:
             """Обертка, выполняющая логирование"""
             # Формируем строку с информацией о вызове
             func_name = func.__name__
@@ -20,12 +31,7 @@ def log(filename=None):
                 # Формируем сообщение об успехе
                 log_message = f"{timestamp} - {func_name} ok\n"
 
-                # Логируем результат
-                if filename:
-                    with open(filename, "a") as f:
-                        f.write(log_message)
-                else:
-                    print(log_message.strip())
+                write_log(filename, log_message)
 
                 return result
 
@@ -35,14 +41,8 @@ def log(filename=None):
                 inputs = f"Inputs: {args}, {kwargs}"
                 log_message = f"{timestamp} - {func_name} error: {error_type}. {inputs}\n"
 
-                # Логируем ошибку
-                if filename:
-                    with open(filename, "a") as f:
-                        f.write(log_message)
-                else:
-                    print(log_message.strip())
-
-                raise  # Пробрасываем исключение дальше
+                write_log(filename, log_message)
+                raise
 
         return wrapper
 

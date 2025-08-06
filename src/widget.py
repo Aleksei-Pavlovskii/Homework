@@ -1,4 +1,4 @@
-from srs.masks import get_mask_account
+from src.masks import get_mask_account
 
 
 def mask_account_card(account_number: str) -> str:
@@ -7,16 +7,20 @@ def mask_account_card(account_number: str) -> str:
     card_name = []
     card_namber_split = account_number.split(" ")
     join_card_number = "".join(card_namber_split[-1])
-    for i in card_namber_split:
-        if i == "Счет":
-            card_name.append(i)
-            return f"{" ".join(card_name)} {get_mask_account(account_number)}"
-        else:
-            pass
+    if len(account_number) > 0:
         for i in card_namber_split:
-            if i.isalpha():
+            if i == "Счет":
                 card_name.append(i)
-        return f"{" ".join(card_name)} {join_card_number[0:4]} {join_card_number[4:6]}** **** {join_card_number[-4:]}"
+                return f"{" ".join(card_name)} {get_mask_account(account_number)}"
+            else:
+                pass
+            for i in card_namber_split:
+                if i.isalpha():
+                    card_name.append(i)
+            return (
+                f"{" ".join(card_name)} {join_card_number[0:4]} {join_card_number[4:6]}** **** {join_card_number[-4:]}"
+            )
+    return ""
 
 
 def get_date(user_data: str) -> str:

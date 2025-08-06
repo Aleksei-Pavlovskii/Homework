@@ -1,5 +1,6 @@
 import pytest
-from decorators import log
+
+from src.decorators import log
 
 
 # Тестовые функции для проверки
@@ -13,7 +14,7 @@ def console_failure():
     raise ValueError("Test error")
 
 
-@log(filename="test_log.txt")
+@log(filename="logs/test_log.txt")
 def file_success(x, y):
     return x * y
 
@@ -37,3 +38,8 @@ def test_console_error(capsys):
     captured = capsys.readouterr()
     assert "console_failure error: ValueError" in captured.out
     assert "Inputs: (), {}" in captured.out
+
+
+def test_write_log():
+    file_success(1, 2)
+    assert "file_success ok\n" in open("logs/test_log.txt", encoding="utf-8").read()
