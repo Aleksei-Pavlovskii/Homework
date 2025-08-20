@@ -30,10 +30,10 @@ def read_json_file(filename: str | None = None) -> Any | list:
     except Exception as err:
         logger.setLevel(logging.ERROR)
         logger.error(f"Произошла ошибка {err}")
-        return 'Произошла ошибка'
+        return "Произошла ошибка"
 
 
-def currency_conversion(transactions: list[dict]) -> float:
+def currency_conversion(transactions: list[dict]) -> float | str:
     """Функция, которая конвертирует валюту и возвращает сумму операций"""
     amount = []
     try:
@@ -58,7 +58,7 @@ def currency_conversion(transactions: list[dict]) -> float:
     except Exception as err:
         logger.setLevel(logging.ERROR)
         logger.error(f"Произошла ошибка {err}")
-        return 'Ошибка при обработке транзакций'
+        return "Ошибка при обработке транзакций"
 
 
 # print(currency_conversion(read_json_file("../data/operations.json")))

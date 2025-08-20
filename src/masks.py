@@ -20,7 +20,7 @@ def get_mask_card_number(card_number: str) -> str:
     except Exception as err:
         logger.setLevel(logging.ERROR)
         logger.error(f"Произошла ошибка {err}")
-        return 'Ошибка при обработке номера карты'
+        return "Ошибка при обработке номера карты"
 
 
 def get_mask_account(account_number: str) -> str:
@@ -35,4 +35,4 @@ def get_mask_account(account_number: str) -> str:
     except Exception as err:
         logger.setLevel(logging.ERROR)
         logger.error(f"Произошла ошибка {err}")
-        return 'Ошибка при обработке номера счета'
+        return "Ошибка при обработке номера счета"
