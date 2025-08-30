@@ -6,6 +6,8 @@ from typing import Any
 import requests
 from dotenv import load_dotenv
 
+from src.filter_data import filter_data_file
+
 load_dotenv()
 
 logger = logging.getLogger("utils")
@@ -21,8 +23,8 @@ def read_json_file(filename: str | None = None) -> Any | list:
     try:
         if filename and os.path.exists(filename):
             with open(filename, encoding="utf-8") as f:
-                data = json.load(f)
-            logger.info(f"Файл {filename} найден")
+                data = filter_data_file(json.load(f))
+            logger.info(f"Файл {data} найден")
             return data
         else:
             logger.warning(f"Файл {filename} не найден")
@@ -59,6 +61,3 @@ def currency_conversion(transactions: list[dict]) -> float | str:
         logger.setLevel(logging.ERROR)
         logger.error(f"Произошла ошибка {err}")
         return "Ошибка при обработке транзакций"
-
-
-# print(currency_conversion(read_json_file("../data/operations.json")))

@@ -4,8 +4,10 @@ from src.utils import currency_conversion, read_json_file
 
 
 @patch("os.path.exists")
-def test_read_json_file(mock_os) -> None:
+@patch("src.utils.filter_data_file")
+def test_read_json_file(mock_filter, mock_os) -> None:
     mock_os.return_value = True
+    mock_filter.return_value = {"1": "2"}
     with patch("builtins.open", mock_open(read_data='{"1":"2"}')):
         assert read_json_file("a") == {"1": "2"}
     assert read_json_file("") == []
